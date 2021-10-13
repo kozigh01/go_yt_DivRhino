@@ -13,19 +13,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package note
 
 import (
-	"log"
-
 	"github.com/kozigh01/go_yt_DivRhino/cmd/studybuddy/cmd"
-	_ "github.com/kozigh01/go_yt_DivRhino/cmd/studybuddy/cmd/note"
-	"github.com/kozigh01/go_yt_DivRhino/cmd/studybuddy/data"
+	"github.com/spf13/cobra"
 )
 
-func main() {
-	if err:= data.OpenDatabase(); err != nil {
-		log.Printf("there was an issue opening the db: %v\n", err)
-	}
-	cmd.Execute()
+// noteCmd represents the note command
+var NoteCmd = &cobra.Command{
+	Use:   "note",
+	Short: "a note can be anything you'd like to study and review",
+	Long: `a note can be anything you'd like to study and review`,
+}
+
+func init() {
+	cmd.RootCmd.AddCommand(NoteCmd)
 }

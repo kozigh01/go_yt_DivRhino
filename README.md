@@ -5,6 +5,7 @@ Youtube:
 
 ## Resources:
 * Cobra: [github](https://github.com/spf13/cobra) | [cobra generator](https://github.com/spf13/cobra/blob/master/cobra/README.md)
+    * Commands in sub-directory: [stack overflow](https://stackoverflow.com/questions/61011873/cant-add-new-cobra-cli-command-when-the-file-is-inside-a-folder)
 * Go project layout: [Mark Wolfe](https://www.wolfe.id.au/2020/03/10/how-do-i-structure-my-go-project/)
 * Dad jokes: [icanhazdadjoke api](https://icanhazdadjoke.com/api)
 * Go packages:
@@ -21,6 +22,9 @@ Youtube:
         ```
 * go-sqlite3: 
     * [github](https://github.com/mattn/go-sqlite3)
+* Promptui:
+    * [github](https://github.com/manifoldco/promptui)
+    * [goDoc](https://pkg.go.dev/github.com/manifoldco/promptui)
 
 
 ## Dadjoke App: Usefule commands:
@@ -68,4 +72,8 @@ $ go mod vendor
 
 $ cobra add init
 
+$ cobra add note
+$ cobra add new -p 'noteCmd'
+
+$ go get github.com/manifoldco/promptui
 ```
