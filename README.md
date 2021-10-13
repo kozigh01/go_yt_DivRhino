@@ -19,6 +19,8 @@ Youtube:
 
         curl -X POST -d '{"query": "query { joke {id joke permalink } }"}' -H "Content-Type: application/json" https://icanhazdadjoke.com/graphql
         ```
+* go-sqlite3: 
+    * [github](https://github.com/mattn/go-sqlite3)
 
 
 ## Dadjoke App: Usefule commands:
@@ -51,5 +53,19 @@ $ $GOPATH/bin/dadjoke random --term cats
 
 ## Study Buddy App: useful commands:
 ```bash
+# initialize cobra app (from project root directory)
+$ cobra init --pkg-name github.com/kozigh01/go_yt_DivRhino/cmd/dadjoke cmd/dadjoke
+$ cd cmd/studybuddy
+$ go run main.go
+
+$ mkdir data
+$ touch data/data.go
+
+# install go-sqlite - run following from the root directory
+$ go get github.com/mattn/go-sqlite3
+$ go mod tidy
+$ go mod vendor
+
+$ cobra add init
 
 ```

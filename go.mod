@@ -3,6 +3,7 @@ module github.com/kozigh01/go_yt_DivRhino
 go 1.17
 
 require (
+	github.com/mattn/go-sqlite3 v1.14.8
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.9.0
 )
