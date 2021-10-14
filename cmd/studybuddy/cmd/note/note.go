@@ -20,13 +20,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// noteCmd represents the note command
-var NoteCmd = &cobra.Command{
+var noteCmd = &cobra.Command{
 	Use:   "note",
 	Short: "a note can be anything you'd like to study and review",
 	Long: `a note can be anything you'd like to study and review`,
 }
 
 func init() {
-	cmd.RootCmd.AddCommand(NoteCmd)
+	cmd.RootCmd.AddCommand(noteCmd)
 }

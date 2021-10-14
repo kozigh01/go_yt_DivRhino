@@ -74,6 +74,7 @@ $ cobra add init
 
 $ cobra add note
 $ cobra add new -p 'noteCmd'
+$ cobra add list -p 'noteCmd'
 
 $ go get github.com/manifoldco/promptui
 ```

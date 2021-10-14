@@ -24,7 +24,7 @@ import (
 )
 
 func main() {
-	if err:= data.OpenDatabase(); err != nil {
+	if err := data.OpenDatabase(); err != nil {
 		log.Printf("there was an issue opening the db: %v\n", err)
 	}
 	cmd.Execute()

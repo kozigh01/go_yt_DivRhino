@@ -38,3 +38,35 @@ func CreateTable() {
 	statement.Exec()
 	log.Println("Studybuddy table created")
 }
+
+func InsertNote(word string, definition string, category string) {
+	insertNoteSQL := `INSERT INTO studybuddy(word, definition, category) VALUES (?, ?, ?)`
+	statement, err := db.Prepare(insertNoteSQL)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	_, err = statement.Exec(word, definition, category)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	log.Println("Inserted study note successfully")
+}
+
+func DisplayAllNotes() {
+	row, err := db.Query("SELECT * FROM studybuddy ORDER BY word")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer row.Close()
+
+	for row.Next() {
+		var idNote int
+		var word string
+		var definition string
+		var category string
+
+		row.Scan(&idNote, &word, &definition, &category)
+		log.Printf("[%s] %s - %s\n", category, word, definition)
+	}
+}

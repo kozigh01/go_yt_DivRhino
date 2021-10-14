@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/kozigh01/go_yt_DivRhino/cmd/studybuddy/data"
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 )
@@ -30,7 +31,7 @@ var newCmd = &cobra.Command{
 	Short: "creates a new studybuddy note",
 	Long:  `creates a new studybuddy note`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("new called")
+		createNewNote()
 	},
 }
 
@@ -40,34 +41,82 @@ type promptContent struct {
 }
 
 func init() {
-	NoteCmd.AddCommand(newCmd)
+	noteCmd.AddCommand(newCmd)
 }
 
 func promptGetInput(pc promptContent) string {
-	validate := func(input string) error {
-		if len(input) <= 0 {
-			return errors.New(pc.errorMsg)
-		}
-		return nil
-	}
-
-	templates := &promptui.PromptTemplates{
-		Prompt: "{{ . }}",
-		Valid: "{{ . | green }}",
-		Invalid: "{{ . | red }}",
-		Success: "{{ . | bold }}",
-	}
-
 	prompt := promptui.Prompt{
 		Label: pc.label,
-		Templates: templates,
-		Validate: validate,
+		Templates: &promptui.PromptTemplates{
+			Prompt:  "{{ . }}",
+			Valid:   "{{ . | green }}",
+			Invalid: "{{ . | red }}",
+			Success: "{{ . | bold }}",
+		},
+		Validate: func(input string) error {
+			if len(input) <= 0 {
+				return errors.New(pc.errorMsg)
+			}
+			return nil
+		},
 	}
+
 	result, err := prompt.Run()
 	if err != nil {
 		log.Fatalf("Prompt failed %v\n", err)
 	}
+
 	log.Printf("Input: %s\n", result)
 
 	return result
+}
+
+func promptGetSelect(pc promptContent) string {
+	items := []string{"animal", "food", "person", "object"}
+	index := -1
+
+	var result string
+	var err error
+
+	prompt := promptui.SelectWithAdd{
+		Label:    pc.label,
+		Items:    items,
+		AddLabel: "Other",
+	}
+	
+	for index < 0 {
+		index, result, err = prompt.Run()
+		if err != nil {
+			log.Fatalf("Prompt failed %v\n", err)
+		}
+
+		if index == -1 {
+			prompt.Items = append(prompt.Items, result)
+		}
+	}
+
+	fmt.Printf("Input: %s\n", result)
+	return result
+}
+
+func createNewNote() {
+	wordPromptContent := promptContent{
+		errorMsg: "Please provide a word",
+		label:    "What word would you like to make a note of? ",
+	}
+	word := promptGetInput(wordPromptContent)
+
+	definitionPromptContent := promptContent{
+		errorMsg: "Please provide a definition",
+		label:    fmt.Sprintf("What is the definition of %s? ", word),
+	}
+	definition := promptGetInput(definitionPromptContent)
+
+	categoryPromptContent := promptContent{
+		errorMsg: "Please provide a category",
+		label:    fmt.Sprintf("What category does %s belong to? ", word),
+	}
+	category := promptGetSelect(categoryPromptContent)
+
+	data.InsertNote(word, definition, category)
 }
