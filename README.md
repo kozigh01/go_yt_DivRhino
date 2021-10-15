@@ -2,6 +2,8 @@
 Youtube: 
     * [How to build a CLI tool with Go and Cobra](https://www.youtube.com/channel/UCpc_4OVIYn-04JjSwUCIa-g)
     * [How to add flags to a CLI tool built with Go and Cobra](https://www.youtube.com/watch?v=kT7Z02bR1IY)
+    * [How to build an interactive CLI app with Cobra and Promptui](https://www.youtube.com/watch?v=so3VZwdWcBg)
+    * [How to create PDFs with Go, Maroto & GoFakeIt](https://www.youtube.com/watch?v=jwOy4JgleTU)
 
 ## Resources:
 * Cobra: [github](https://github.com/spf13/cobra) | [cobra generator](https://github.com/spf13/cobra/blob/master/cobra/README.md)
@@ -25,6 +27,10 @@ Youtube:
 * Promptui:
     * [github](https://github.com/manifoldco/promptui)
     * [goDoc](https://pkg.go.dev/github.com/manifoldco/promptui)
+* maroto:
+    * [github](https://github.com/johnfercher/maroto)
+* Gofakeit:
+    * [github](https://github.com/brianvoe/gofakeit)
 
 
 ## Dadjoke App: Usefule commands:
@@ -77,4 +83,13 @@ $ cobra add new -p 'noteCmd'
 $ cobra add list -p 'noteCmd'
 
 $ go get github.com/manifoldco/promptui
+```
+
+##  Fruitful-pdf App: useful commands:
+```bash
+$ cd cmd/fruitful-pdf
+$ go mod init github.com/kozigh01/go_yt_DivRhino/fruitful-pdf
+
+$ go get github.com/johnfercher/maroto
+$ go get github.com/brianvoe/gofakeit/v6
 ```
